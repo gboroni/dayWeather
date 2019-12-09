@@ -1,0 +1,36 @@
+<div class="hero" data-bg-image="images/banner.png">
+  <div class="container">
+    <form action="#" class="find-location">
+      {{input
+        value=this.findText
+        placeholder="Find your location..."
+      }}
+      <input type="submit" value="Find" {{action "getCityForecast"}} >
+    </form>
+  </div>
+</div>
+
+<div class="forecast-table">
+  <div class="container">
+    <div class="forecast-container">
+      {{#if this.errorMsg }}
+        <div class="today forecast">
+          <div class="forecast-content">
+            <div class="num">{{ this.errorMsg }}
+            </div>
+          </div>
+        </div>
+      {{else}}
+
+        <ListDay @city={{this.model.city}}>
+          {{#each model.list as |day|}}
+            <DayInfo @day={{day}} as |day| />
+          {{/each}}
+        </ListDay>
+
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+
